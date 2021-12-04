@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+\usepackage[left=0.5in,top=0.5in,right=0.5in,bottom=0.5in,nohead]{geometry}
+\title{HW4 - FINM 35910}
+\author{\vspace{-10ex}}
+\date{\vspace{-8ex}}
+\begin{document}
+\maketitle
+\setlength{\parindent}{0pt}
+We use the moving average and the momentum indicator. Thus, the key parameters are then
+the period of the moving average and the momentum indicator, also how many ticks they should
+keep their trend consistent. We use grid search to find the optimal parameters, based on both
+the parameter values and the final net return(P\&L). Some parameters have really high P\&L but 
+we think that it is not stable enough and will not perform well across other data, so it's a tradeoff
+between the training data and the testing data, in other words avoiding overfitting. 
+\medbreak
+We use the most recent data from May.2020 to now to optmize the parameters, and the best parameters
+we get are 4 and 4. First 4 indicates the period we use to calculate the moving average as well
+as the gap we use to calculate the momentum, and the second 4 indicates the tick number that the trends
+have to keep consistent. The training period gives a net P\&L that's 139 times our starting fund,
+reaching 13900\% of return in one year. 
+\medbreak
+Besides this, we also try using the machine learning techniques to predict with these two
+indicators whether at any given hour, the relation between a closing price and an opening price. 
+If the closing is higher, we should then long at the start of the hour, and vice versa. 
+This approach doesn't yield a good result even after caliberation, with accuracy only at around 50\%, 
+and running the trading algorithm yields negative return in our period. Possible reasons include:
+we might need more indicators to strengthen the model; the after-day trading period may affect
+the correlation between the previous closing data and the next day opening data, and thus indicators 
+calculated using previous data might lose accuracy. In general, our machine learning models are not well 
+adapted to the market yet, whether it's random forest, linear support vector machine, or neural network. 
+
+\end{document}
