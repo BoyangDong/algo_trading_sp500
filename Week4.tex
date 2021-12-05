@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\title {Week 4 Write up}
+\date{December 2021}
+
+\begin{document}
+\maketitle
+\setlength{\parindent}{0pt}
+Key parameters:
+\begin{itemize}
+
+\item normalized asset weights
+\item exponential moving average 
+\\(reduce lag by putting more weight on more recent observations) 
+\item lagging factor and span
+\end{itemize}
+\medbreak
+Improvement we made here was to switch SMA to EMA, with lag value to calculate decay parameter.
+SMA timeseries are much less noisy than original price timeseries. However it lags original price timeseries of D/2 days, if we calculate SMA using D days. Team switches to exponential moving average. Using pandas, and a lag value we provided, the decay value is automatically calculated. 
+Given this, the short time SMA and and EMA can be compared. Lag can only be diminished, but not disappear. 
+\medbreak
+Strategy is updated from the previous write up, with different asset class, we consider the crossing of the two as potential trading signals:
+\\1. Price timeseries cross EMA timeseries from below: 
+\\Close existing short position, then go long one unit of asset
+\\2. Price timeseries cross EMA timeseries from above: 
+\\Close existing long position, then go short one unit of asset
+\medbreak
+Ticker data handling:
+\\Data we use here is close price. With that, the signal can only be triggered until the close of the trading day. Therefore, it is an error to say on day t0 will have a long/short position. Rather, this should be a position of the following day, t0+1. 
+\medbreak
+Optimization and future work will be position sizing, which we did not consider at this case, but assume that we use all our funds available to trade these assets we pick, and our funds are split equally across these assets. 
+\end{document}
